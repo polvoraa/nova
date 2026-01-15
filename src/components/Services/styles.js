@@ -4,15 +4,23 @@ export const Section = styled.section`
   position: relative;
   z-index: 2;
 
-  padding: 160px 10% 180px;
+  padding: 160px clamp(20px, 6vw, 10%) 180px;
   text-align: center;
+
+  @media (max-width: 700px) {
+    padding: 120px 6% 140px;
+  }
 `;
 
 export const Title = styled.h2`
-  font-size: 2.2rem;
+  font-size: clamp(1.8rem, 4.5vw, 2.2rem);
   font-weight: 500;
   letter-spacing: -0.02em;
   margin-bottom: 80px;
+
+  @media (max-width: 700px) {
+    margin-bottom: 48px;
+  }
 `;
 
 export const Grid = styled.div`
@@ -51,6 +59,10 @@ export const Card = styled.div`
     0 20px 40px rgba(0,0,0,0.45);
 
   transition: transform 0.35s ease;
+
+  @media (max-width: 700px) {
+    padding: 32px 24px;
+  }
 `;
 
 export const Icon = styled.div`
@@ -84,4 +96,8 @@ export const CardText = styled.p`
   font-size: 0.9rem;
   line-height: 1.6;
   color: #b5b5b5;
+
+  @media (max-width: 700px) {
+    font-size: 0.88rem;
+  }
 `;

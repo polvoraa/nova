@@ -4,7 +4,7 @@ export const Section = styled.section`
   position: relative;
   z-index: 2;
 
-  padding: 180px 10% 220px;
+  padding: 180px clamp(20px, 6vw, 10%) 220px;
   text-align: center;
 
   /* overlay suave para foco */
@@ -25,6 +25,10 @@ export const Section = styled.section`
     position: relative;
     z-index: 1;
   }
+
+  @media (max-width: 700px) {
+    padding: 140px 6% 160px;
+  }
 `;
 
 export const Content = styled.div`
@@ -38,6 +42,10 @@ export const Title = styled.h2`
   letter-spacing: -0.02em;
   line-height: 1.25;
   margin-bottom: 48px;
+
+  @media (max-width: 700px) {
+    margin-bottom: 32px;
+  }
 `;
 
 export const Button = styled.button`
@@ -92,5 +100,10 @@ export const Button = styled.button`
       rgba(70,70,70,0.25) 70%,
       rgba(70,70,70,0.08) 100%
     );
+  }
+
+  @media (max-width: 520px) {
+    width: 100%;
+    max-width: 320px;
   }
 `;

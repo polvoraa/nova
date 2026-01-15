@@ -11,6 +11,10 @@ export const LayoutBackground = styled.div`
 
   /* evita bugs de scroll */
   overflow-x: hidden;
+
+  @media (max-width: 700px) {
+    background-position: center top;
+  }
 `;
 
 export const Overlay = styled.div`

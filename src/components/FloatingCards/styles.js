@@ -4,15 +4,20 @@ export const Section = styled.section`
   position: relative;
   z-index: 4;
 
-  margin-top: 130px; /* invade o Hero */
-  padding: 0 10% 120px;
+  margin-top: 130px;
+  padding: 0 clamp(20px, 6vw, 10%) 120px;
 
-  pointer-events: none; /* sensação de flutuação */
+  pointer-events: none;
+
+  @media (max-width: 700px) {
+    margin-top: -150px;
+    padding-bottom: 96px;
+  }
 `;
 
 export const Grid = styled.div`
-  max-width: 900px;     
-  margin: 0 auto;       
+  max-width: 900px;
+  margin: 0 auto;
 
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -22,7 +27,12 @@ export const Grid = styled.div`
 
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
-    max-width: 420px;
+    max-width: 480px;
+    gap: 24px;
+  }
+
+  @media (max-width: 520px) {
+    max-width: 100%;
   }
 `;
 
@@ -51,6 +61,10 @@ export const Card = styled.div`
 
   overflow: hidden;
   cursor: default;
+
+  @media (max-width: 520px) {
+    font-size: 0.85rem;
+  }
 
   /* GLASS REAL */
   &::after {
@@ -94,6 +108,3 @@ export const Card = styled.div`
     pointer-events: none;
   }
 `;
-
-
-

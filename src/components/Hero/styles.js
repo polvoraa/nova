@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const Section = styled.section`
   position: relative;
   min-height: 100vh;
-  padding: 0 10%;
+  padding: 0 clamp(20px, 6vw, 10%);
 
   display: flex;
   align-items: flex-start;
@@ -25,7 +25,7 @@ export const Content = styled.div`
   margin-top: 35vh;
 
   h1 {
-    font-size: clamp(3rem, 5vw, 4.4rem);
+    font-size: clamp(2.4rem, 6.5vw, 4.4rem);
     font-weight: 100;
     letter-spacing: -0.02em;
   }
@@ -37,13 +37,26 @@ export const Content = styled.div`
     color: #f4ebdc;
     line-height: 1.7;
   }
+
+  @media (max-width: 700px) {
+    margin-top: 34vh;
+
+    p {
+      margin-top: 22px;
+      font-size: 0.95rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    margin-top: 30vh;
+  }
 `;
 
 /* Botão Hero */
 export const HeroButton = styled.button`
   position: relative;
   margin: 52px auto 0;
-  padding: 15px 60px;
+  padding: 14px 52px;
 
   border-radius: 10px;
   border: none;
@@ -93,6 +106,11 @@ export const HeroButton = styled.button`
       rgba(50, 50, 50, 0.22) 60%,
       rgba(50, 50, 50, 0.04) 100%
     );
+  }
+
+  @media (max-width: 520px) {
+    width: 100%;
+    max-width: 320px;
   }
 `;
 

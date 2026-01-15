@@ -4,7 +4,7 @@ export const Container = styled.header`
   position: fixed;
   top: 0;
   width: 100%;
-  padding: 18px 10%;
+  padding: 18px clamp(18px, 6vw, 10%);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -17,6 +17,13 @@ export const Container = styled.header`
   );
 
   backdrop-filter: blur(6px);
+
+  @media (max-width: 860px) {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px 6%;
+    text-align: center;
+  }
 `;
 
 
@@ -39,6 +46,17 @@ export const Logo = styled.div`
     color: #e8decc;
     opacity: 0.9;
   }
+
+  @media (max-width: 520px) {
+    img {
+      height: 40px;
+    }
+
+    span {
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+    }
+  }
 `;
 
 
@@ -46,6 +64,13 @@ export const Right = styled.div`
   display: flex;
   align-items: center;
   gap: 48px;
+
+  @media (max-width: 860px) {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
 `;
 
 export const Nav = styled.nav`
@@ -62,9 +87,20 @@ export const Nav = styled.nav`
       color: #ffffff;
     }
   }
+
+  @media (max-width: 860px) {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px;
+    width: 100%;
+  }
 `;
 
 export const Actions = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
   button {
     padding: 10px 28px;
     border-radius: 999px;
@@ -78,6 +114,15 @@ export const Actions = styled.div`
       background: #e8decc;
       color: #000000;
       border-color: #e8decc;
+    }
+  }
+
+  @media (max-width: 520px) {
+    width: 100%;
+
+    button {
+      width: 100%;
+      max-width: 280px;
     }
   }
 `;

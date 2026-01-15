@@ -12,6 +12,7 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.colors.text};
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
+    min-height: 100vh;
   }
 
   a {
@@ -22,5 +23,14 @@ export const GlobalStyles = createGlobalStyle`
     html, body {
     width: 100%;
     font-family: "Playfair Display", serif;
+  }
+
+  #root {
+    width: 100%;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
   }
 `;
