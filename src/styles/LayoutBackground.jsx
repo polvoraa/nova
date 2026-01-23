@@ -3,6 +3,7 @@ import bgLanding from "../assets/bg-landing.jpg";
 
 export const LayoutBackground = styled.div`
   min-height: 100vh;
+  position: relative;
 
   background-image: url(${bgLanding});
   background-size: cover;

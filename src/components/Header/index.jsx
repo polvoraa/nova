@@ -1,7 +1,9 @@
 import { Container, Logo, Right, Nav, Actions } from "./styles";
-import logoImg from "../../assets/logo.svg"; // ajuste se necessário
+import logoImg from "../../assets/logo.svg";
 
-export default function Header() {
+export default function Header({ currentRoute = "home" }) {
+  const isPortfolio = currentRoute === "portfolio";
+
   return (
     <Container>
       <Logo>
@@ -11,9 +13,18 @@ export default function Header() {
 
       <Right>
         <Nav>
-          <a href="#services">Serviços</a>
-          <a href="#portfolio">Portfólio</a>
-          <a href="#about">Sobre</a>
+          {isPortfolio ? (
+            <>
+              <a href="#/">Inicio</a>
+              <a href="#/portfolio">Portfolio</a>
+            </>
+          ) : (
+            <>
+              <a href="#services">Servicos</a>
+              <a href="#/portfolio">Portfolio</a>
+              <a href="#about">Sobre</a>
+            </>
+          )}
         </Nav>
 
         <Actions>

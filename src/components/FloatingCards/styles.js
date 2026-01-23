@@ -61,6 +61,7 @@ export const Card = styled.div`
 
   overflow: hidden;
   cursor: default;
+  transition: transform 240ms ease, box-shadow 240ms ease;
 
   @media (max-width: 520px) {
     font-size: 0.85rem;
@@ -106,5 +107,18 @@ export const Card = styled.div`
     mask-composite: exclude;
 
     pointer-events: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.24),
+        0 20px 44px rgba(0,0,0,0.5);
+    }
+
+    &:hover::after {
+      opacity: 0.2;
+    }
   }
 `;
