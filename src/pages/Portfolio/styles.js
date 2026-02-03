@@ -67,7 +67,7 @@ export const Subtitle = styled.p`
 `;
 
 export const BrandingSection = styled.section`
-  position: relative;
+  position: absolute;
   z-index: 1;
   margin-top: 56px;
   display: flex;
