@@ -4,11 +4,11 @@ export const Section = styled.section`
   position: relative;
   z-index: 2;
 
-  padding: 160px clamp(20px, 6vw, 10%) 180px;
+  padding: 220px clamp(20px, 6vw, 10%) 180px;
   text-align: center;
 
   @media (max-width: 700px) {
-    padding: 120px 6% 140px;
+    padding: 170px 6% 140px;
   }
 `;
 
@@ -45,10 +45,10 @@ export const Card = styled.div`
   text-align: center;
 
   background: linear-gradient(
-    180deg,
-    rgba(40,40,40,0.45) 0%,
-    rgba(40,40,40,0.2) 60%,
-    rgba(40,40,40,0.05) 100%
+    90deg,
+    rgba(255,255,255,0.10) 0%,
+    rgba(255,255,255,0.08) 50%,
+    rgba(255,255,255,0.04) 100%
   );
 
   backdrop-filter: blur(10px);
@@ -66,8 +66,8 @@ export const Card = styled.div`
 `;
 
 export const Icon = styled.div`
-  width: 44px;
-  height: 44px;
+  width: 54px;
+  height: 54px;
 
   margin: 0 auto 22px;
 
@@ -77,7 +77,7 @@ export const Icon = styled.div`
   align-items: center;
   justify-content: center;
 
-  font-size: 1.1rem;
+  font-size: 1.35rem;
 
   background: rgba(255,255,255,0.06);
   color: rgba(232,222,204,0.85);

@@ -8,7 +8,7 @@ export const Background = styled(LayoutBackground)`
 export const StrongOverlay = styled.div`
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.70);
   pointer-events: none;
 `;
 
@@ -28,7 +28,7 @@ export const Glow = styled.div`
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(232, 222, 204, 0.14),
+    rgba(232, 222, 204, 0.08),
     rgba(232, 222, 204, 0)
   );
   top: -180px;
@@ -38,8 +38,6 @@ export const Glow = styled.div`
 `;
 
 export const Hero = styled.section`
-  position: relative;
-  z-index: 1;
   max-width: 900px;
   display: flex;
   flex-direction: column;
@@ -67,8 +65,6 @@ export const Subtitle = styled.p`
 `;
 
 export const BrandingSection = styled.section`
-  position: relative;
-  z-index: 1;
   margin-top: 56px;
   display: flex;
   flex-direction: column;
@@ -80,9 +76,17 @@ export const SectionTitle = styled.h2`
   letter-spacing: 0.04em;
 `;
 
-export const Masonry = styled.div`
-  columns: 3 240px;
+export const MasonryGrid = styled.div`
+  column-count: 3;
   column-gap: 20px;
+
+  @media (max-width: 1100px) {
+    column-count: 2;
+  }
+
+  @media (max-width: 700px) {
+    column-count: 1;
+  }
 `;
 
 export const Photo = styled.figure`
@@ -93,17 +97,27 @@ export const Photo = styled.figure`
   background: rgba(20, 20, 20, 0.78);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
 
   img {
     width: 100%;
-    height: auto;
     display: block;
+    transition: transform 0.4s ease-in-out;
+  }
+
+  &:hover img {
+    transform: scale(1.15);
   }
 `;
 
-export const CTA = styled.p`
-  margin-top: 64px;
-  font-size: 1.05rem;
-  max-width: 560px;
-  color: ${({ theme }) => theme.colors.text};
+export const LandingPhoto = styled(Photo)`
+  height: 420px;
+
+  img {
+    transition: transform 1.4s ease-in-out;
+  }
+
+  &:hover img {
+    transform: translateY(calc(-100% + 420px));
+  }
 `;

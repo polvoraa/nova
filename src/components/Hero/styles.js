@@ -80,6 +80,27 @@ export const HeroButton = styled.button`
   transition: all 0.35s ease;
   overflow: hidden;
 
+  /* glow cinematico */
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -60%;
+    background: conic-gradient(
+      from 180deg,
+      rgba(232, 222, 204, 0) 0deg,
+      rgba(232, 222, 204, 0.2) 30deg,
+      rgba(232, 222, 204, 0.06) 80deg,
+      rgba(232, 222, 204, 0.2) 140deg,
+      rgba(232, 222, 204, 0) 200deg,
+      rgba(232, 222, 204, 0.14) 260deg,
+      rgba(232, 222, 204, 0) 320deg
+    );
+    opacity: 0;
+    filter: blur(20px);
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
   /* linha superior */
   &::before {
     content: "";
@@ -106,6 +127,13 @@ export const HeroButton = styled.button`
       rgba(50, 50, 50, 0.22) 60%,
       rgba(50, 50, 50, 0.04) 100%
     );
+    box-shadow:
+      0 14px 30px rgba(0,0,0,0.35),
+      0 0 26px rgba(232, 222, 204, 0.18);
+  }
+
+  &:hover::after {
+    opacity: 1;
   }
 
   @media (max-width: 520px) {

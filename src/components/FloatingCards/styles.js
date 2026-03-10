@@ -50,6 +50,11 @@ export const Card = styled.div`
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.055),
+    rgba(255, 255, 255, 0.025)
+  );
   color: rgba(235,235,235,0.92);
   font-size: 0.9rem;
   font-weight: 400;
@@ -76,12 +81,12 @@ export const Card = styled.div`
 
     background: linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.12) 0%,
-      rgba(255, 255, 255, 0.06) 60%,
-      rgba(255, 255, 255, 0.02) 100%
+      rgba(255, 255, 255, 0.16) 0%,
+      rgba(255, 255, 255, 0.08) 60%,
+      rgba(255, 255, 255, 0.03) 100%
     );
 
-    opacity: 0.1; /* CONTROLE  */
+    opacity: 0.06; /* CONTROLE  */
     pointer-events: none;
   }
 
@@ -95,8 +100,8 @@ export const Card = styled.div`
 
     background: linear-gradient(
       180deg,
-      rgba(255,255,255,0.28),
-      rgba(255,255,255,0.12),
+      rgba(255,255,255,0.1),
+      rgba(255,255,255,0.04),
       rgba(255,255,255,0)
     );
 

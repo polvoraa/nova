@@ -21,6 +21,6 @@ export const LayoutBackground = styled.div`
 export const Overlay = styled.div`
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.70);
   pointer-events: none;
 `;

@@ -24,7 +24,11 @@ export default function Hero() {
           que querem se destacar.
         </p>
 
-        <HeroButton>Nosso Portfólio</HeroButton>
+        <a href="#/portfolio">
+          <HeroButton>
+            Nosso Portfólio
+          </HeroButton>
+        </a>
       </Content>
     </Section>
   );

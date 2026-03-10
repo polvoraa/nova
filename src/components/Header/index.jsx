@@ -6,10 +6,12 @@ export default function Header({ currentRoute = "home" }) {
 
   return (
     <Container>
-      <Logo>
-        <img src={logoImg} alt="Nova Studio" />
-        <span>Nova Studio</span>
-      </Logo>
+      <a href="#/">
+        <Logo>
+          <img src={logoImg} alt="Nova Studio" />
+          <span>Nova Studio</span>
+        </Logo>
+      </a>
 
       <Right>
         <Nav>
