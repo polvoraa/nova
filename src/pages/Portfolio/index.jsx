@@ -21,15 +21,33 @@ import {
 export default function PortfolioPage() {
 
   const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
 
-    fetch("http://localhost:5000/api/projects")
+    fetch("https://nova-09wl.onrender.com/api/projects")
       .then(res => res.json())
-      .then(data => setProjects(data))
-      .catch(err => console.log(err));
+      .then(data => {
+        setProjects(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.log("Erro ao buscar projetos:", err);
+        setLoading(false);
+      });
 
   }, []);
+
+  if (loading) {
+    return (
+      <Background>
+        <StrongOverlay />
+        <Page>
+          <Title>Carregando projetos...</Title>
+        </Page>
+      </Background>
+    );
+  }
 
   const brandingProjects = projects.filter(p => p.category === "branding");
   const landingProjects = projects.filter(p => p.category === "landing");
@@ -97,15 +115,27 @@ export default function PortfolioPage() {
                 transition={{ duration: 0.7, delay: index * 0.06 }}
                 viewport={{ once: true }}
               >
-                <a href={project.link} target="_blank">
 
+                {project.link ? (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      loading="lazy"
+                    />
+                  </a>
+                ) : (
                   <img
                     src={project.image}
                     alt={project.title}
                     loading="lazy"
                   />
+                )}
 
-                </a>
               </LandingPhoto>
 
             ))}

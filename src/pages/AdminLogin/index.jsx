@@ -13,25 +13,29 @@ export default function AdminLogin(){
 
 const [email,setEmail] = useState("")
 const [password,setPassword] = useState("")
+const [loading,setLoading] = useState(false)
 
 const handleLogin = async (e) => {
 
 e.preventDefault()
 
-const res = await fetch("http://localhost:5000/api/auth/login",{
+setLoading(true)
 
+try{
+
+const res = await fetch(
+"https://nova-09wl.onrender.com/api/auth/login",
+{
 method:"POST",
-
 headers:{
 "Content-Type":"application/json"
 },
-
 body:JSON.stringify({
 email,
 password
 })
-
-})
+}
+)
 
 const data = await res.json()
 
@@ -39,13 +43,22 @@ if(data.token){
 
 localStorage.setItem("token",data.token)
 
-window.location.hash="/admin"
+window.location.hash="/admin/dashboard"
 
 }else{
 
 alert("Login inválido")
 
 }
+
+}catch(err){
+
+console.log("Erro no login:",err)
+alert("Erro ao conectar com servidor")
+
+}
+
+setLoading(false)
 
 }
 
@@ -62,17 +75,21 @@ return(
 <Input
 type="email"
 placeholder="Email"
+value={email}
 onChange={(e)=>setEmail(e.target.value)}
 />
 
 <Input
 type="password"
 placeholder="Senha"
+value={password}
 onChange={(e)=>setPassword(e.target.value)}
 />
 
 <Button type="submit">
-Entrar
+
+{loading ? "Entrando..." : "Entrar"}
+
 </Button>
 
 </Form>

@@ -48,9 +48,9 @@ export default function AdminAddProject() {
       const formData = new FormData()
       formData.append("image",image)
 
-      // upload imagem
+      // upload da imagem
       const uploadResponse = await fetch(
-        "http://localhost:5000/api/upload",
+        "https://nova-09wl.onrender.com/api/upload",
         {
           method:"POST",
           body:formData
@@ -59,9 +59,13 @@ export default function AdminAddProject() {
 
       const uploadData = await uploadResponse.json()
 
+      if(!uploadData.url){
+        throw new Error("Erro no upload da imagem")
+      }
+
       // salvar projeto
       const projectResponse = await fetch(
-        "http://localhost:5000/api/projects",
+        "https://nova-09wl.onrender.com/api/projects",
         {
           method:"POST",
           headers:{
@@ -80,16 +84,22 @@ export default function AdminAddProject() {
 
       const data = await projectResponse.json()
 
-      console.log(data)
+      if(projectResponse.ok){
 
-      alert("Projeto publicado 🚀")
+        alert("Projeto publicado 🚀")
 
-      window.location.hash="/admin/dashboard"
+        window.location.hash="/admin/dashboard"
+
+      }else{
+
+        throw new Error(data.message)
+
+      }
 
     }catch(err){
 
       console.log(err)
-      alert("Erro ao publicar")
+      alert("Erro ao publicar projeto")
 
     }
 
@@ -142,6 +152,7 @@ export default function AdminAddProject() {
 
           <FileInput
             type="file"
+            accept="image/*"
             onChange={(e)=>setImage(e.target.files[0])}
           />
 
