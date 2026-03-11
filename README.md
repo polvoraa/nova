@@ -82,6 +82,6 @@ Desenvolvido por Matheus Pólvora
 ---
 
 # 📸 Screenshots
-![Home do site](src/assets/screenshots/screencapture-nova-six-sage-vercel-app-2026-03-11-15_37_21.pnghome.png)
-![Página de Login](src/assets/screenshots/screencapture-nova-six-sage-vercel-app-2026-03-11-15_37_21.pnghome.png)
-![Painel de Administrador](src/assets/screenshots/screencapture-localhost-5173-2026-03-11-15_38_06.png)
+![Home do site](src/assets/screenshots/homepage.png)
+![Página de Login](src/assets/screenshots/adminlogin.png)
+![Painel de Administrador](src/assets/screenshots//dashboardpanel.png)
