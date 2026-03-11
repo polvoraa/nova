@@ -1,16 +1,87 @@
-# React + Vite
+# 🚀 Portfolio Website with Admin Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto é um **portfólio web completo** desenvolvido para apresentar projetos de forma profissional e também permitir **gerenciamento de conteúdo sem necessidade de alterar código**.
 
-Currently, two official plugins are available:
+O sistema possui uma **interface pública moderna** para visitantes e um **dashboard administrativo protegido por login**, onde é possível gerenciar os projetos exibidos no site.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+# 🌐 Demonstração
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+🔗 **Acesse o site:**  
+https://nova-six-sage.vercel.app/#/
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# ✨ Funcionalidades
+
+## 🏠 Landing Page
+- Página inicial focada em **apresentação e atração**
+- Layout moderno e minimalista
+- Estrutura pensada para apresentar o desenvolvedor e seus trabalhos
+
+## 📂 Página de Portfólio
+- Listagem dinâmica de projetos
+- Cada projeto contém:
+  - Título
+  - Descrição
+  - Imagem
+  - Categoria
+  - Link do projeto
+- Design responsivo
+
+## 🔐 Sistema de Login
+- Autenticação segura
+- Acesso restrito ao painel administrativo
+
+## 🧠 Dashboard Administrativo
+Painel que permite gerenciar o conteúdo do site sem precisar alterar código.
+
+Funções disponíveis:
+
+- ➕ Adicionar novos projetos
+- 🖼️ Upload de imagens
+- ✏️ Editar projetos
+- ❌ Remover projetos
+- 🔄 Atualizar conteúdo do site dinamicamente
+
+---
+
+# 🛠 Tecnologias Utilizadas
+
+### Frontend
+- React
+- Vite
+- Styled Components
+
+### Backend
+- Node.js
+- Express
+
+### Banco de Dados
+- MongoDB
+- Mongoose
+
+### Upload de Imagens
+- Cloudinary
+
+### Deploy
+- Vercel (Front-end)
+- Render(Back-end)
+
+
+---
+
+# 👨‍💻 Autor
+
+Desenvolvido por Matheus Pólvora
+
+💼 Portfolio em desenvolvimento
+🚀 Desenvolvedor focado em experiências digitais e sistemas web
+
+---
+
+# 📸 Screenshots
+![Home do site](src/assets/screenshots/screencapture-nova-six-sage-vercel-app-2026-03-11-15_37_21.pnghome.png)
+![Página de Login](src/assets/screenshots/screencapture-nova-six-sage-vercel-app-2026-03-11-15_37_21.pnghome.png)
+![Painel de Administrador](src/assets/screenshots/screencapture-localhost-5173-2026-03-11-15_38_06.png)
