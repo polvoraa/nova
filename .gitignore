@@ -35,3 +35,5 @@ build
 
 # logs
 npm-debug.log
+.vercel
+.env*.local

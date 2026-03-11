@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { MdDriveFolderUpload } from "react-icons/md";
 import {
   Page,
   Container,
@@ -8,58 +9,59 @@ import {
   Textarea,
   Select,
   FileInput,
-  Button
+  Button,
+  FileInputWrapper
 } from "./styles";
 
 export default function AdminAddProject() {
 
-  const [title,setTitle] = useState("")
-  const [description,setDescription] = useState("")
-  const [category,setCategory] = useState("branding")
-  const [link,setLink] = useState("")
-  const [image,setImage] = useState(null)
-  const [loading,setLoading] = useState(false)
+  const [title, setTitle] = useState("")
+  const [description, setDescription] = useState("")
+  const [category, setCategory] = useState("branding")
+  const [link, setLink] = useState("")
+  const [image, setImage] = useState(null)
+  const [loading, setLoading] = useState(false)
 
-  useEffect(()=>{
+  useEffect(() => {
 
     const token = localStorage.getItem("token")
 
-    if(!token){
-      window.location.hash="/admin/login"
+    if (!token) {
+      window.location.hash = "/admin/login"
     }
 
-  },[])
+  }, [])
 
-  async function handleSubmit(e){
+  async function handleSubmit(e) {
 
     e.preventDefault()
 
-    if(!image){
+    if (!image) {
       alert("Selecione uma imagem")
       return
     }
 
     setLoading(true)
 
-    try{
+    try {
 
       const token = localStorage.getItem("token")
 
       const formData = new FormData()
-      formData.append("image",image)
+      formData.append("image", image)
 
       // upload da imagem
       const uploadResponse = await fetch(
         "https://nova-09wl.onrender.com/api/upload",
         {
-          method:"POST",
-          body:formData
+          method: "POST",
+          body: formData
         }
       )
 
       const uploadData = await uploadResponse.json()
 
-      if(!uploadData.url){
+      if (!uploadData.url) {
         throw new Error("Erro no upload da imagem")
       }
 
@@ -67,36 +69,36 @@ export default function AdminAddProject() {
       const projectResponse = await fetch(
         "https://nova-09wl.onrender.com/api/projects",
         {
-          method:"POST",
-          headers:{
-            "Content-Type":"application/json",
-            "Authorization":`Bearer ${token}`
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
           },
-          body:JSON.stringify({
+          body: JSON.stringify({
             title,
             description,
             category,
             link,
-            image:uploadData.url
+            image: uploadData.url
           })
         }
       )
 
       const data = await projectResponse.json()
 
-      if(projectResponse.ok){
+      if (projectResponse.ok) {
 
         alert("Projeto publicado 🚀")
 
-        window.location.hash="/admin/dashboard"
+        window.location.hash = "/admin/dashboard"
 
-      }else{
+      } else {
 
         throw new Error(data.message)
 
       }
 
-    }catch(err){
+    } catch (err) {
 
       console.log(err)
       alert("Erro ao publicar projeto")
@@ -107,7 +109,7 @@ export default function AdminAddProject() {
 
   }
 
-  return(
+  return (
 
     <Page>
 
@@ -120,18 +122,18 @@ export default function AdminAddProject() {
           <Input
             placeholder="Título"
             value={title}
-            onChange={(e)=>setTitle(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
           />
 
           <Textarea
             placeholder="Descrição"
             value={description}
-            onChange={(e)=>setDescription(e.target.value)}
+            onChange={(e) => setDescription(e.target.value)}
           />
 
           <Select
             value={category}
-            onChange={(e)=>setCategory(e.target.value)}
+            onChange={(e) => setCategory(e.target.value)}
           >
 
             <option value="branding">
@@ -147,14 +149,17 @@ export default function AdminAddProject() {
           <Input
             placeholder="Link do projeto (opcional)"
             value={link}
-            onChange={(e)=>setLink(e.target.value)}
+            onChange={(e) => setLink(e.target.value)}
           />
-
-          <FileInput
-            type="file"
-            accept="image/*"
-            onChange={(e)=>setImage(e.target.files[0])}
-          />
+          <FileInputWrapper>
+            Escolher Arquivo
+            <MdDriveFolderUpload style={{ marginLeft: "12px", fontSize: "20px" }} />
+            <FileInput
+              type="file"
+              accept="image/*"
+              onChange={(e) => setImage(e.target.files[0])}
+            />
+          </FileInputWrapper>
 
           <Button type="submit">
 

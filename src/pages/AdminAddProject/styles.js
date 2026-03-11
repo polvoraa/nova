@@ -1,110 +1,202 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const Page = styled.div`
-
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-
-background:#0a0a0a;
-
-`
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a0a0a;
+`;
 
 export const Container = styled.div`
-
-width:420px;
-padding:40px;
-
-background:rgba(255,255,255,0.05);
-border-radius:14px;
-
-backdrop-filter:blur(10px);
-
-`
+  width: 420px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  backdrop-filter: blur(10px);
+`;
 
 export const Title = styled.h1`
-
-font-size:28px;
-margin-bottom:30px;
-color:white;
-
-`
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #E8DECC;
+`;
 
 export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
 
-display:flex;
-flex-direction:column;
-gap:16px;
+// Glassmorphism styles
+const glassInputStyles = `
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  color: white;
+  padding: 12px;
+  transition: all 0.3s ease;
 
-`
+  &:focus {
+    outline: none;
+    border-color: #E8DECC;
+    box-shadow: 0 0 10px rgba(232, 222, 204, 0.35);
+  }
+`;
 
 export const Input = styled.input`
-
-padding:12px;
-
-background:#111;
-border:none;
-border-radius:8px;
-
-color:white;
-
-`
+  ${glassInputStyles}
+`;
 
 export const Textarea = styled.textarea`
-
-padding:12px;
-
-background:#111;
-border:none;
-
-border-radius:8px;
-
-color:white;
-
-min-height:90px;
-
-`
+  ${glassInputStyles}
+  min-height: 90px;
+  resize: none;
+`;
 
 export const Select = styled.select`
+  ${glassInputStyles}
+  appearance: none;
+  cursor: pointer;
 
-padding:12px;
+  option {
+    background: #111;
+    color: white;
+    padding: 8px 12px;
+    transition: background 0.2s ease;
+  }
 
-background:#111;
-border:none;
-
-border-radius:8px;
-
-color:white;
-
-`
+  option:hover {
+    background: #E8DECC;
+    color: #0a0a0a;
+  }
+`;
 
 export const FileInput = styled.input`
-
-color:white;
-
-`
+  color: white;
+`;
 
 export const Button = styled.button`
+  position: relative;
+  padding: 14px 38px;
+  border-radius: 14px;
+  border: none;
+  background: #E8DECC;
+  color: black;
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.35);
+  transition: all 0.35s ease;
+  overflow: hidden;
 
-padding:14px;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -40%;
+    background: radial-gradient(
+      circle,
+      rgba(232, 222, 204, 0.35) 0%,
+      rgba(232, 222, 204, 0.18) 35%,
+      rgba(232, 222, 204, 0) 70%
+    );
+    opacity: 0;
+    filter: blur(18px);
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+  }
 
-border:none;
-border-radius:10px;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 16%;
+    right: 16%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.25),
+      transparent
+    );
+  }
 
-background:white;
-color:black;
+  &:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(
+      180deg,
+      rgba(70, 70, 70, 0.55) 0%,
+      rgba(70, 70, 70, 0.25) 70%,
+      rgba(70, 70, 70, 0.08) 100%
+    );
+    color: #E8DECC;
+    box-shadow:
+      0 14px 34px rgba(0, 0, 0, 0.45),
+      0 0 26px rgba(232, 222, 204, 0.22);
+  }
 
-font-weight:600;
+  &:hover::after {
+    opacity: 1;
+  }
 
-cursor:pointer;
+  @media (max-width: 520px) {
+    width: 100%;
+    max-width: 320px;
+  }
+`;
 
-transition:0.2s;
+export const FileInputWrapper = styled.label`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
 
-:hover{
+  padding: 14px 38px;
+  border-radius: 14px;
 
-opacity:0.8;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 
-}
+  color: #E8DECC;
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.45),
+    0 0 26px rgba(232, 222, 204, 0.09);
 
-`
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 16%;
+    right: 16%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.25),
+      transparent
+    );
+  }
+
+  &:hover {
+    transform: scale(1.01);
+  }
+
+  input {
+    display: none;
+  }
+
+  svg {
+    font-size: 20px;
+  }
+`;
