@@ -3,56 +3,89 @@ const router = express.Router()
 
 const Project = require("../models/Project")
 
-// criar projeto
-router.post("/", async (req,res)=>{
+// CACHE EM MEMÓRIA
+let cachedProjects = null
+let lastFetch = 0
+const CACHE_TIME = 1000 * 60 * 5 // 5 minutos
 
-try{
+// ===============================
+// CRIAR PROJETO
+// ===============================
+router.post("/", async (req, res) => {
 
-const project = new Project(req.body)
+  try {
 
-await project.save()
+    const project = new Project(req.body)
 
-res.json(project)
+    await project.save()
 
-}catch(err){
+    // limpa cache
+    cachedProjects = null
 
-res.status(500).json({error:err.message})
+    res.json(project)
 
-}
+  } catch (err) {
 
-})
+    res.status(500).json({ error: err.message })
 
-// listar projetos
-router.get("/", async (req,res)=>{
-
-try{
-
-const projects = await Project.find().sort({createdAt:-1})
-
-res.json(projects)
-
-}catch(err){
-
-res.status(500).json({error:err.message})
-
-}
+  }
 
 })
 
-// deletar projeto
-router.delete("/:id", async (req,res)=>{
 
-try{
+// ===============================
+// LISTAR PROJETOS
+// ===============================
+router.get("/", async (req, res) => {
 
-await Project.findByIdAndDelete(req.params.id)
+  try {
 
-res.json({message:"Projeto deletado"})
+    const now = Date.now()
 
-}catch(err){
+    // se o cache existir e não estiver expirado
+    if (cachedProjects && (now - lastFetch < CACHE_TIME)) {
+      return res.json(cachedProjects)
+    }
 
-res.status(500).json({error:err.message})
+    const projects = await Project
+      .find()
+      .sort({ createdAt: -1 })
+      .lean()
 
-}
+    // salva no cache
+    cachedProjects = projects
+    lastFetch = now
+
+    res.json(projects)
+
+  } catch (err) {
+
+    res.status(500).json({ error: err.message })
+
+  }
+
+})
+
+
+// ===============================
+// DELETAR PROJETO
+// ===============================
+router.delete("/:id", async (req, res) => {
+
+  try {
+
+    await Project.findByIdAndDelete(req.params.id)
+
+    // limpa cache
+    cachedProjects = null
+
+    res.json({ message: "Projeto deletado" })
+
+  } catch (err) {
+
+    res.status(500).json({ error: err.message })
+
+  }
 
 })
 
