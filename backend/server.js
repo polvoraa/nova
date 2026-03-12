@@ -26,6 +26,13 @@ app.get("/", (req,res)=>{
 res.send("API Nova Studio funcionandoo")
 })
 
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "ok",
+    message: "API Nova Studio rodando 🚀"
+  });
+});
+
 app.listen(5000, ()=>{
 console.log("Servidor rodando em http://localhost:5000")
 })
