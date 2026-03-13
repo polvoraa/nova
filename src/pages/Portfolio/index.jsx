@@ -111,19 +111,19 @@ export default function PortfolioPage() {
                     </VideoCard>
                   );
                 } else if (item.fileType === 'pdf') {
-                  return (
-                    <PdfCard
-                      key={item._id}
-                      onClick={() => window.open(item.fileUrl, '_blank')}
-                    >
-                      <div className="pdf-placeholder">
-                        <span className="pdf-icon">📄</span>
-                        <h3>{item.title}</h3>
-                        {item.description && <p>{item.description}</p>}
-                      </div>
-                    </PdfCard>
-                  );
-                }
+  return (
+    <PdfCard
+      key={item._id}
+      onClick={() => window.open(item.fileUrl, '_blank')}
+    >
+      <div className="pdf-placeholder">
+        <span className="pdf-icon">📄</span>
+        <h3>{item.title}</h3>
+        {item.description && <p>{item.description}</p>}
+      </div>
+    </PdfCard>
+  );
+}
                 return null;
               })}
             </MasonryGrid>

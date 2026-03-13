@@ -15,14 +15,19 @@ router.post('/', upload.single('file'), async (req, res) => {
       return res.status(400).json({ error: 'Nenhum arquivo enviado' });
     }
 
-    // Determina o tipo de recurso no Cloudinary
+    // Determina o tipo de recurso e o tipo de arquivo
     let resourceType = 'auto';
-    if (req.file.mimetype === 'application/pdf') {
-      resourceType = 'raw'; // força raw para PDF
-    } else if (req.file.mimetype.startsWith('video/')) {
+    let fileType = 'image';
+
+    if (req.file.mimetype.startsWith('video/')) {
       resourceType = 'video';
+      fileType = 'video';
+    } else if (req.file.mimetype === 'application/pdf') {
+      resourceType = 'raw'; // força raw para PDF
+      fileType = 'pdf';
     } else if (req.file.mimetype.startsWith('image/')) {
       resourceType = 'image';
+      fileType = 'image';
     }
 
     // Upload para o Cloudinary
@@ -31,7 +36,7 @@ router.post('/', upload.single('file'), async (req, res) => {
         {
           folder: 'nova-studio',
           resource_type: resourceType,
-          public_id: req.file.originalname.split('.')[0] // opcional
+          public_id: req.file.originalname.split('.')[0] // opcional: remove extensão
         },
         (error, result) => {
           if (error) reject(error);
@@ -41,16 +46,11 @@ router.post('/', upload.single('file'), async (req, res) => {
       uploadStream.end(req.file.buffer);
     });
 
-    // Define o tipo do arquivo para o frontend
-    let fileType = 'image';
-    if (req.file.mimetype.startsWith('video/')) {
-      fileType = 'video';
-    } else if (req.file.mimetype === 'application/pdf') {
-      fileType = 'pdf';
-    }
+    // A URL retornada em result.secure_url já é a correta para o tipo raw?
+    // Para raw, a URL será algo como: https://res.cloudinary.com/<cloud>/raw/upload/...
+    // Para garantir, podemos construir a URL manualmente ou confiar no result.
+    // Vamos usar a URL como está.
 
-    // Para PDF, usamos a URL raw, que geralmente é a mesma, mas garantimos
-    // que estamos enviando a URL correta (result.secure_url já é a raw se resource_type for raw)
     res.json({
       url: result.secure_url,
       fileType: fileType
