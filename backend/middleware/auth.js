@@ -1,9 +1,19 @@
 const jwt = require('jsonwebtoken');
 
 module.exports = function (req, res, next) {
-  const token = req.header('Authorization')?.replace('Bearer ', '');
-  if (!token) {
-    return res.status(401).json({ message: 'Acesso negado. Token não fornecido.' });
+  const authHeader = req.header('Authorization');
+  if (!authHeader) {
+    return res.status(401).json({ message: 'Acesso negado. Nenhum token fornecido.' });
+  }
+
+  const parts = authHeader.split(' ');
+  if (parts.length !== 2) {
+    return res.status(401).json({ message: 'Erro no formato do token.' });
+  }
+
+  const [scheme, token] = parts;
+  if (!/^Bearer$/i.test(scheme)) {
+    return res.status(401).json({ message: 'Token mal formatado.' });
   }
 
   try {
@@ -11,6 +21,6 @@ module.exports = function (req, res, next) {
     req.user = decoded;
     next();
   } catch (err) {
-    res.status(400).json({ message: 'Token inválido.' });
+    return res.status(401).json({ message: 'Token inválido.' });
   }
 };
