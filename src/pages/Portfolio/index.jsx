@@ -113,19 +113,13 @@ export default function PortfolioPage() {
                 } else if (item.fileType === 'pdf') {
                   return (
                     <PdfCard
-                      as={motion.figure}
                       key={item._id}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.7, delay: index * 0.06 }}
-                      viewport={{ once: true }}
                       onClick={() => window.open(item.fileUrl, '_blank')}
                     >
                       <div className="pdf-placeholder">
                         <span className="pdf-icon">📄</span>
                         <h3>{item.title}</h3>
                         {item.description && <p>{item.description}</p>}
-                        <span className="pdf-link">Clique para abrir</span>
                       </div>
                     </PdfCard>
                   );
