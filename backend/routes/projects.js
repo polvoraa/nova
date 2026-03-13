@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Project = require("../models/Project");
-const auth = require("../middleware/auth"); // ajuste conforme seu middleware de autenticação
+const auth = require("../middleware/auth"); // ajuste o caminho se necessário
 
 // GET todos os projetos (público)
 router.get("/", async (req, res) => {

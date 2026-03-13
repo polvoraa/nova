@@ -1,66 +1,21 @@
-const router = require("express").Router()
-const bcrypt = require("bcryptjs")
-const jwt = require("jsonwebtoken")
-const User = require("../models/User")
+const jwt = require('jsonwebtoken');
 
-// REGISTRO
-router.post("/register", async (req, res) => {
-
-  try {
-
-    const hashedPassword = await bcrypt.hash(req.body.password, 10)
-
-    const user = new User({
-      email: req.body.email,
-      password: hashedPassword
-    })
-
-    await user.save()
-
-    res.json(user)
-
-  } catch (err) {
-
-    res.status(500).json(err)
-
+module.exports = function (req, res, next) {
+  const authHeader = req.header('Authorization');
+  if (!authHeader) {
+    return res.status(401).json({ message: 'Acesso negado. Token não fornecido.' });
   }
 
-})
-
-
-// LOGIN
-router.post("/login", async (req, res) => {
-
-  try {
-
-    const user = await User.findOne({ email: req.body.email })
-
-    if (!user) {
-      return res.status(400).json("Usuário não encontrado")
-    }
-
-    const validPassword = await bcrypt.compare(
-      req.body.password,
-      user.password
-    )
-
-    if (!validPassword) {
-      return res.status(400).json("Senha inválida")
-    }
-
-    const token = jwt.sign(
-      { id: user._id },
-      "novastudiosecret"
-    )
-
-    res.json({ token })
-
-  } catch (err) {
-
-    res.status(500).json(err)
-
+  const token = authHeader.replace('Bearer ', '');
+  if (!token) {
+    return res.status(401).json({ message: 'Acesso negado. Token mal formatado.' });
   }
 
-})
-
-module.exports = router
+  try {
+    const verified = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = verified;
+    next();
+  } catch (err) {
+    res.status(400).json({ message: 'Token inválido.' });
+  }
+};
