@@ -1,39 +1,44 @@
-const express = require("express")
-const multer = require("multer")
-const { CloudinaryStorage } = require("multer-storage-cloudinary")
-const cloudinary = require("../config/cloudinary")
+const express = require("express");
+const multer = require("multer");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("../config/cloudinary");
 
-const router = express.Router()
+const router = express.Router();
 
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: "nova-studio",
-    allowed_formats: ["jpg","png","jpeg","webp"]
+    allowed_formats: ["jpg", "png", "jpeg", "webp", "mp4", "mov", "pdf"],
+    resource_type: "auto" // essencial para vídeos
   }
-})
+});
 
-const upload = multer({ storage })
+const upload = multer({ storage });
 
-router.post("/", (req,res)=>{
+router.post("/", (req, res) => {
+  upload.single("file")(req, res, (err) => {
+    if (err) {
+      console.error("ERRO UPLOAD:", err);
+      return res.status(500).json({ error: err.message });
+    }
+    if (!req.file) {
+      return res.status(400).json({ error: "Nenhum arquivo enviado" });
+    }
 
-upload.single("image")(req,res,(err)=>{
+    // Determinar o tipo com base no mimetype
+    let fileType = 'image';
+    if (req.file.mimetype.startsWith('video/')) {
+      fileType = 'video';
+    } else if (req.file.mimetype === 'application/pdf') {
+      fileType = 'pdf';
+    }
 
-if(err){
-console.error("ERRO UPLOAD:", err)
-return res.status(500).json({error:err.message})
-}
+    res.json({
+      url: req.file.path,
+      fileType: fileType
+    });
+  });
+});
 
-if(!req.file){
-return res.status(400).json({error:"Nenhuma imagem enviada"})
-}
-
-res.json({
-url:req.file.path
-})
-
-})
-
-})
-
-module.exports = router
+module.exports = router;

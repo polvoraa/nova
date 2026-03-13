@@ -28,7 +28,6 @@ export const Form = styled.form`
   gap: 16px;
 `;
 
-// Glassmorphism styles
 const glassInputStyles = `
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
@@ -53,24 +52,6 @@ export const Textarea = styled.textarea`
   ${glassInputStyles}
   min-height: 90px;
   resize: none;
-`;
-
-export const Select = styled.select`
-  ${glassInputStyles}
-  appearance: none;
-  cursor: pointer;
-
-  option {
-    background: #111;
-    color: white;
-    padding: 8px 12px;
-    transition: background 0.2s ease;
-  }
-
-  option:hover {
-    background: #E8DECC;
-    color: #0a0a0a;
-  }
 `;
 
 export const FileInput = styled.input`

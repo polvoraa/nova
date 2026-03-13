@@ -1,92 +1,77 @@
-const express = require("express")
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
+const Project = require("../models/Project");
+const auth = require("../middleware/auth"); // ajuste conforme seu middleware de autenticação
 
-const Project = require("../models/Project")
-
-// CACHE EM MEMÓRIA
-let cachedProjects = null
-let lastFetch = 0
-const CACHE_TIME = 1000 * 60 * 5 // 5 minutos
-
-// ===============================
-// CRIAR PROJETO
-// ===============================
-router.post("/", async (req, res) => {
-
-  try {
-
-    const project = new Project(req.body)
-
-    await project.save()
-
-    // limpa cache
-    cachedProjects = null
-
-    res.json(project)
-
-  } catch (err) {
-
-    res.status(500).json({ error: err.message })
-
-  }
-
-})
-
-
-// ===============================
-// LISTAR PROJETOS
-// ===============================
+// GET todos os projetos (público)
 router.get("/", async (req, res) => {
-
   try {
-
-    const now = Date.now()
-
-    // se o cache existir e não estiver expirado
-    if (cachedProjects && (now - lastFetch < CACHE_TIME)) {
-      return res.json(cachedProjects)
-    }
-
-    const projects = await Project
-      .find()
-      .sort({ createdAt: -1 })
-      .lean()
-
-    // salva no cache
-    cachedProjects = projects
-    lastFetch = now
-
-    res.json(projects)
-
+    const projects = await Project.find().sort({ createdAt: -1 });
+    res.json(projects);
   } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
-    res.status(500).json({ error: err.message })
+// POST criar novo projeto (protegido)
+router.post("/", auth, async (req, res) => {
+  const { title, description, category, link, fileUrl, fileType } = req.body;
 
+  if (!title || !description || !category || !fileUrl || !fileType) {
+    return res.status(400).json({ message: "Campos obrigatórios faltando" });
   }
 
-})
-
-
-// ===============================
-// DELETAR PROJETO
-// ===============================
-router.delete("/:id", async (req, res) => {
-
   try {
-
-    await Project.findByIdAndDelete(req.params.id)
-
-    // limpa cache
-    cachedProjects = null
-
-    res.json({ message: "Projeto deletado" })
-
+    const newProject = new Project({
+      title,
+      description,
+      category,
+      link,
+      fileUrl,
+      fileType
+    });
+    const savedProject = await newProject.save();
+    res.status(201).json(savedProject);
   } catch (err) {
-
-    res.status(500).json({ error: err.message })
-
+    res.status(400).json({ message: err.message });
   }
+});
 
-})
+// GET um projeto por ID (opcional, público)
+router.get("/:id", async (req, res) => {
+  try {
+    const project = await Project.findById(req.params.id);
+    if (!project) return res.status(404).json({ message: "Projeto não encontrado" });
+    res.json(project);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
-module.exports = router
+// PUT atualizar projeto (protegido)
+router.put("/:id", auth, async (req, res) => {
+  try {
+    const updatedProject = await Project.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true, runValidators: true }
+    );
+    if (!updatedProject) return res.status(404).json({ message: "Projeto não encontrado" });
+    res.json(updatedProject);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+// DELETE remover projeto (protegido)
+router.delete("/:id", auth, async (req, res) => {
+  try {
+    const deletedProject = await Project.findByIdAndDelete(req.params.id);
+    if (!deletedProject) return res.status(404).json({ message: "Projeto não encontrado" });
+    res.json({ message: "Projeto removido" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+module.exports = router;

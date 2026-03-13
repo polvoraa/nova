@@ -64,7 +64,7 @@ export const Subtitle = styled.p`
   line-height: 1.7;
 `;
 
-export const BrandingSection = styled.section`
+export const Section = styled.section`
   margin-top: 56px;
   display: flex;
   flex-direction: column;
@@ -89,7 +89,7 @@ export const MasonryGrid = styled.div`
   }
 `;
 
-export const Photo = styled.figure`
+export const MediaCard = styled.figure`
   margin: 0 0 20px;
   break-inside: avoid;
   border-radius: ${({ theme }) => theme.radius.md};
@@ -110,14 +110,23 @@ export const Photo = styled.figure`
   }
 `;
 
-export const LandingPhoto = styled(Photo)`
-  height: 420px;
-
-  img {
-    transition: transform 1.4s ease-in-out;
+export const VideoCard = styled(MediaCard)`
+  video {
+    width: 100%;
+    display: block;
   }
+`;
 
-  &:hover img {
-    transform: translateY(calc(-100% + 420px));
+export const PdfCard = styled(MediaCard)`
+  .pdf-placeholder {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a1a;
+    color: #E8DECC;
+    font-size: 1.2rem;
+    gap: 10px;
   }
 `;
