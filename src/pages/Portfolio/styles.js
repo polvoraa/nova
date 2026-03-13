@@ -118,15 +118,53 @@ export const VideoCard = styled(MediaCard)`
 `;
 
 export const PdfCard = styled(MediaCard)`
+  cursor: pointer;
+  
   .pdf-placeholder {
-    height: 200px;
+    height: 260px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background: #1a1a1a;
     color: #E8DECC;
-    font-size: 1.2rem;
-    gap: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+
+    .pdf-icon {
+      font-size: 3.5rem;
+      margin-bottom: 12px;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      margin: 0 0 8px;
+      font-weight: 500;
+      color: #E8DECC;
+    }
+
+    p {
+      font-size: 0.9rem;
+      color: rgba(232, 222, 204, 0.7);
+      margin: 0 0 12px;
+      line-height: 1.4;
+    }
+
+    .pdf-link {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #E8DECC;
+      border-bottom: 1px solid rgba(232, 222, 204, 0.3);
+      padding-bottom: 2px;
+    }
+  }
+
+  &:hover .pdf-placeholder {
+    background: #2a2a2a;
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
   }
 `;
