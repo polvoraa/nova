@@ -3,6 +3,9 @@ import logoImg from "../../assets/logo.svg";
 
 export default function Header({ currentRoute = "home" }) {
   const isPortfolio = currentRoute === "portfolio";
+  const goToContact = () => {
+    window.location.hash = "contact";
+  };
 
   return (
     <Container>
@@ -30,7 +33,7 @@ export default function Header({ currentRoute = "home" }) {
         </Nav>
 
         <Actions>
-          <button>Contato</button>
+          <button type="button" onClick={goToContact}>Contato</button>
         </Actions>
       </Right>
     </Container>

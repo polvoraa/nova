@@ -4,7 +4,7 @@ export const Section = styled.section`
   position: relative;
   z-index: 2;
 
-  padding: 300px clamp(20px, 6vw, 10%) 840px;
+  padding: 300px clamp(20px, 6vw, 10%) 420px;
   text-align: center;
 
   /* overlay suave para foco */
@@ -27,7 +27,7 @@ export const Section = styled.section`
   }
 
   @media (max-width: 700px) {
-    padding: 180px 6% 630px;
+    padding: 180px 6% 315px;
   }
 `;
 

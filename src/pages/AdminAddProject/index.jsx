@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { MdDriveFolderUpload } from "react-icons/md";
+import { apiUrl } from "../../lib/api";
 import {
   Page,
   Container,
@@ -48,7 +49,7 @@ export default function AdminAddProject() {
       formData.append("file", file);
 
       const uploadResponse = await fetch(
-        "https://nova-09wl.onrender.com/api/upload",
+        apiUrl("/api/upload"),
         {
           method: "POST",
           body: formData
@@ -62,7 +63,7 @@ export default function AdminAddProject() {
       }
 
       const projectResponse = await fetch(
-        "https://nova-09wl.onrender.com/api/projects",
+        apiUrl("/api/projects"),
         {
           method: "POST",
           headers: {

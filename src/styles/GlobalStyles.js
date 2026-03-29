@@ -10,7 +10,7 @@ export const GlobalStyles = createGlobalStyle`
   body {
     background: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.text};
-    font-family: 'Inter', sans-serif;
+    font-family: "Montserrat", sans-serif;
     overflow-x: hidden;
     min-height: 100vh;
   }
@@ -22,7 +22,7 @@ export const GlobalStyles = createGlobalStyle`
 
     html, body {
     width: 100%;
-    font-family: "Playfair Display", serif;
+    font-family: "Montserrat", sans-serif;
   }
 
   #root {

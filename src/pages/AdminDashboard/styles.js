@@ -17,7 +17,13 @@ export const Header = styled.div`
   display:flex;
   justify-content:space-between;
   align-items:center;
+  gap:20px;
   margin-bottom:40px;
+
+  @media (max-width: 720px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
 export const Title = styled.h1`
@@ -201,5 +207,15 @@ export const DeleteButton = styled.button`
   @media (max-width: 520px) {
     width: 100%;
     max-width: 320px;
+  }
+`;
+
+export const Actions = styled.div`
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+
+  @media (max-width: 520px) {
+    width: 100%;
   }
 `;

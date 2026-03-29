@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Header from "../../components/Header";
+import { apiUrl } from "../../lib/api";
 import {
   Background,
   StrongOverlay,
@@ -23,7 +24,7 @@ export default function PortfolioPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://nova-09wl.onrender.com/api/projects")
+    fetch(apiUrl("/api/projects"))
       .then(res => res.json())
       .then(data => {
         setItems(data);
@@ -111,19 +112,19 @@ export default function PortfolioPage() {
                     </VideoCard>
                   );
                 } else if (item.fileType === 'pdf') {
-  return (
-    <PdfCard
-      key={item._id}
-      onClick={() => window.open(item.fileUrl, '_blank')}
-    >
-      <div className="pdf-placeholder">
-        <span className="pdf-icon">📄</span>
-        <h3>{item.title}</h3>
-        {item.description && <p>{item.description}</p>}
-      </div>
-    </PdfCard>
-  );
-}
+                  return (
+                    <PdfCard
+                      key={item._id}
+                      onClick={() => window.open(item.fileUrl, '_blank')}
+                    >
+                      <div className="pdf-placeholder">
+                        <span className="pdf-icon">📄</span>
+                        <h3>{item.title}</h3>
+                        {item.description && <p>{item.description}</p>}
+                      </div>
+                    </PdfCard>
+                  );
+                }
                 return null;
               })}
             </MasonryGrid>

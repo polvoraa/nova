@@ -7,6 +7,7 @@ const mongoose = require("mongoose")
 const authRoutes = require("./routes/auth")
 const uploadRoutes = require("./routes/upload")
 const projectRoutes = require("./routes/projects")
+const contactRoutes = require("./routes/contacts")
 
 const app = express()
 
@@ -21,6 +22,7 @@ mongoose.connect(process.env.MONGO_URI)
 app.use("/api/auth", authRoutes)
 app.use("/api/upload", uploadRoutes)
 app.use("/api/projects", projectRoutes)
+app.use("/api/contacts", contactRoutes)
 
 app.get("/", (req,res)=>{
 res.send("API Nova Studio funcionandoo")

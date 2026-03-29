@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { apiUrl } from "../../lib/api";
 import {
   Page,
   Container,
   Header,
   Title,
   AddButton,
+  Actions,
   Grid,
   Card,
   Image,
@@ -19,7 +21,7 @@ export default function AdminDashboard() {
 
   async function loadProjects() {
     try {
-      const res = await fetch("https://nova-09wl.onrender.com/api/projects");
+      const res = await fetch(apiUrl("/api/projects"));
       const data = await res.json();
       setProjects(data);
     } catch (err) {
@@ -43,7 +45,7 @@ export default function AdminDashboard() {
 
     try {
       const token = localStorage.getItem("token");
-      await fetch(`https://nova-09wl.onrender.com/api/projects/${id}`, {
+      await fetch(apiUrl(`/api/projects/${id}`), {
         method: "DELETE",
         headers: {
           "Authorization": `Bearer ${token}`
@@ -71,9 +73,14 @@ export default function AdminDashboard() {
       <Container>
         <Header>
           <Title>Dashboard</Title>
-          <AddButton onClick={() => window.location.hash = "/admin/add"}>
-            Adicionar Item
-          </AddButton>
+          <Actions>
+            <AddButton onClick={() => window.location.hash = "/admin/messages"}>
+              Ver Mensagens
+            </AddButton>
+            <AddButton onClick={() => window.location.hash = "/admin/add"}>
+              Adicionar Item
+            </AddButton>
+          </Actions>
         </Header>
 
         <Grid>

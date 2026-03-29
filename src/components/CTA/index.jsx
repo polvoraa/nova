@@ -7,6 +7,10 @@ import {
 } from "./styles";
 
 export default function CTA() {
+  const goToContact = () => {
+    window.location.hash = "contact";
+  };
+
   return (
     <Section>
       <Content
@@ -20,7 +24,7 @@ export default function CTA() {
           Vamos criar algo<br />com impacto visual?
         </Title>
 
-        <Button>
+        <Button type="button" onClick={goToContact}>
           Entre em contato
         </Button>
       </Content>

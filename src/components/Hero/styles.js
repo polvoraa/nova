@@ -26,7 +26,7 @@ export const Content = styled.div`
 
   h1 {
     font-size: clamp(2.4rem, 6.5vw, 4.4rem);
-    font-weight: 100;
+    font-weight: 600;
     letter-spacing: -0.02em;
   }
 

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { apiUrl } from "../../lib/api";
 
 import {
 Page,
@@ -24,7 +25,7 @@ setLoading(true)
 try{
 
 const res = await fetch(
-"https://nova-09wl.onrender.com/api/auth/login",
+apiUrl("/api/auth/login"),
 {
 method:"POST",
 headers:{

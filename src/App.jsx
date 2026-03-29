@@ -4,11 +4,13 @@ import Hero from "./components/Hero";
 import Services from "./components/Services";
 import FloatingCards from "./components/FloatingCards";
 import CTA from "./components/CTA";
+import ContactSection from "./components/ContactSection";
 
 import PortfolioPage from "./pages/Portfolio";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminAddProject from "./pages/AdminAddProject";
+import AdminMessages from "./pages/AdminMessages";
 
 import { LayoutBackground, Overlay } from "./styles/LayoutBackground";
 
@@ -21,6 +23,8 @@ const getRouteFromHash = (hash) => {
   if (hash.startsWith("#/admin/dashboard")) return "admin-dashboard";
 
   if (hash.startsWith("#/admin/add")) return "admin-add";
+
+  if (hash.startsWith("#/admin/messages")) return "admin-messages";
 
   return "home";
 };
@@ -49,6 +53,8 @@ export default function App() {
 
   if (route === "admin-add") return <AdminAddProject />;
 
+  if (route === "admin-messages") return <AdminMessages />;
+
   return (
     <LayoutBackground>
       <Overlay />
@@ -57,6 +63,7 @@ export default function App() {
       <FloatingCards />
       <Services />
       <CTA />
+      <ContactSection />
     </LayoutBackground>
   );
 }
